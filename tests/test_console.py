@@ -14,7 +14,8 @@ from tests.test_core import URL, make_pr
 class ConsoleTests(unittest.TestCase):
     def encoded_stream(self, encoding):
         buffer = io.BytesIO()
-        stream = io.TextIOWrapper(buffer, encoding=encoding, errors="strict")
+        # These assertions test encoding; keep platform newline translation separate.
+        stream = io.TextIOWrapper(buffer, encoding=encoding, errors="strict", newline="")
         self.addCleanup(stream.close)
         return stream, buffer
 
